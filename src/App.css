@@ -1,0 +1,343 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,700&family=Cormorant+SC:wght@300;400;600&display=swap');
+
+:root {
+  --gold:  #c8a020;
+  --cream: #f2e9d8;
+  --dark:  rgba(8, 10, 28, 0.85);
+}
+
+/* ── Scene ───────────────────────────────────────────────────── */
+.scene {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+}
+
+/* ── Painting ────────────────────────────────────────────────── */
+.painting {
+  position: absolute;
+  inset: 0;
+  background: url('/vangogh.jpg') center / cover no-repeat;
+  filter: saturate(1.15) brightness(0.92);
+}
+
+/* ── Sky veil ────────────────────────────────────────────────── */
+.sky-veil {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(8, 10, 32, 0.62)  0%,
+    rgba(8, 10, 32, 0.48) 25%,
+    rgba(8, 10, 32, 0.22) 45%,
+    rgba(8, 10, 32, 0.06) 60%,
+    transparent           72%
+  );
+}
+
+/* ── Navigation ──────────────────────────────────────────────── */
+nav {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.8rem 3.5rem;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+}
+.brand-bar {
+  display: block;
+  width: 3px;
+  height: 26px;
+  background: var(--gold);
+  border-radius: 2px;
+}
+.brand-name {
+  font-family: 'Cormorant SC', serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  color: var(--cream);
+}
+
+.nav-links {
+  display: flex;
+  gap: 2.8rem;
+  list-style: none;
+}
+.nav-links a {
+  font-size: 1.0rem;
+  font-weight: 400;
+  color: rgba(242, 233, 216, 0.72);
+  text-decoration: none;
+  letter-spacing: 0.06em;
+  transition: color 0.2s;
+  position: relative;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -3px; left: 0; right: 0;
+  height: 1px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transition: transform 0.2s ease;
+}
+.nav-links a:hover,
+.nav-links a.active {
+  color: var(--gold);
+}
+.nav-links a.active::after,
+.nav-links a:hover::after {
+  transform: scaleX(1);
+}
+
+.nav-ticket {
+  font-family: 'Cormorant SC', serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  color: var(--gold);
+  border: 1px solid rgba(200, 160, 32, 0.5);
+  padding: 0.55rem 1.5rem;
+  text-decoration: none;
+  transition: background 0.22s, border-color 0.22s;
+}
+.nav-ticket:hover {
+  background: rgba(200, 160, 32, 0.14);
+  border-color: var(--gold);
+}
+
+/* ── Scarecrow stage (home only) ─────────────────────────────── */
+.scarecrow-stage {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 15;
+}
+
+.scarecrow {
+  position: absolute;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: all;
+  cursor: pointer;
+}
+.scarecrow img {
+  height: var(--h);
+  width: auto;
+  display: block;
+  transition: filter 0.28s ease, transform 0.28s ease;
+}
+.scarecrow:hover img {
+  filter:
+    drop-shadow(0 0  6px rgba(255, 240, 120, 1.0))
+    drop-shadow(0 0 18px rgba(255, 185,  30, 0.85))
+    drop-shadow(0 0 40px rgba(255, 120,   0, 0.45));
+  transform: translateY(-10px) scale(1.06);
+}
+.scarecrow-label {
+  font-family: 'Cormorant SC', serif;
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  color: var(--cream);
+  background: rgba(8, 10, 28, 0.78);
+  border: 1px solid rgba(200, 160, 32, 0.45);
+  padding: 0.22rem 0.75rem;
+  margin-top: 5px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+.scarecrow:hover .scarecrow-label {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Home hero — single-line title ──────────────────────────── */
+.hero {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+  pointer-events: none;
+  /* Shift the title into the sky half of the painting */
+  padding-bottom: 38%;
+}
+
+.home-title {
+  font-family: 'Cormorant SC', serif;
+  font-size: clamp(2.8rem, 7vw, 6.5rem);
+  font-weight: 600;
+  color: var(--cream);
+  letter-spacing: 0.12em;
+  white-space: nowrap;
+  text-shadow:
+    0 2px 20px rgba(0, 0, 0, 0.65),
+    0 0  60px rgba(0, 0, 0, 0.30);
+}
+
+/* ── Sub-page content panel ──────────────────────────────────── */
+.page-panel {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -46%);
+  width: min(860px, 90vw);
+  max-height: 76vh;
+  overflow-y: auto;
+  z-index: 20;
+  background: rgba(6, 8, 22, 0.84);
+  border: 1px solid rgba(200, 160, 32, 0.22);
+  border-top: 2px solid var(--gold);
+  padding: 2.8rem 3.2rem;
+  backdrop-filter: blur(10px);
+  scrollbar-width: thin;
+  scrollbar-color: var(--gold) transparent;
+}
+
+.page-title {
+  font-family: 'Cormorant SC', serif;
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: var(--gold);
+  letter-spacing: 0.16em;
+  margin-bottom: 0.5rem;
+}
+.page-sub {
+  font-size: 1.0rem;
+  font-weight: 300;
+  font-style: italic;
+  color: rgba(242, 233, 216, 0.6);
+  margin-bottom: 2rem;
+  letter-spacing: 0.03em;
+}
+
+/* ── Crops page ──────────────────────────────────────────────── */
+.crops-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+}
+.crop-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(200, 160, 32, 0.15);
+  padding: 1.2rem 1.4rem;
+  transition: border-color 0.2s, background 0.2s;
+}
+.crop-card:hover {
+  border-color: rgba(200, 160, 32, 0.4);
+  background: rgba(255, 255, 255, 0.07);
+}
+.crop-icon   { font-size: 1.8rem; margin-bottom: 0.3rem; }
+.crop-name   { font-family: 'Cormorant SC', serif; font-size: 1.05rem; color: var(--cream); letter-spacing: 0.08em; }
+.crop-season { font-size: 0.82rem; color: rgba(242, 233, 216, 0.5); font-style: italic; }
+.crop-status {
+  font-family: 'Cormorant SC', serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  margin-top: 0.4rem;
+  padding: 0.18rem 0.55rem;
+  width: fit-content;
+}
+.status-growing   { background: rgba(80, 180, 60, 0.18);  color: #8eda6a; border: 1px solid rgba(80, 180, 60, 0.3);  }
+.status-planted   { background: rgba(60, 140, 220, 0.18); color: #80b8f0; border: 1px solid rgba(60, 140, 220, 0.3); }
+.status-harvested { background: rgba(200, 160, 32, 0.18); color: var(--gold); border: 1px solid rgba(200, 160, 32, 0.3); }
+.status-planned   { background: rgba(160, 100, 220, 0.18);color: #c090f0; border: 1px solid rgba(160, 100, 220, 0.3); }
+
+/* ── Members page ────────────────────────────────────────────── */
+.members-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+.member-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 1.4rem 0.8rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(200, 160, 32, 0.14);
+  transition: border-color 0.25s, transform 0.25s;
+  cursor: default;
+}
+.member-card:hover {
+  border-color: rgba(200, 160, 32, 0.45);
+  transform: translateY(-4px);
+}
+.member-img {
+  height: 140px;
+  width: auto;
+  transition: filter 0.28s ease;
+}
+.member-card:hover .member-img {
+  filter:
+    drop-shadow(0 0  5px rgba(255, 240, 120, 1.0))
+    drop-shadow(0 0 14px rgba(255, 185,  30, 0.8));
+}
+.member-name {
+  font-family: 'Cormorant SC', serif;
+  font-size: 1.0rem;
+  color: var(--cream);
+  letter-spacing: 0.14em;
+}
+.member-role {
+  font-size: 0.8rem;
+  font-style: italic;
+  color: rgba(242, 233, 216, 0.5);
+  text-align: center;
+}
+
+/* ── News page ───────────────────────────────────────────────── */
+.news-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.news-item {
+  padding: 1.6rem 0;
+  border-bottom: 1px solid rgba(200, 160, 32, 0.12);
+}
+.news-item:first-child { padding-top: 0; }
+.news-date {
+  font-family: 'Cormorant SC', serif;
+  font-size: 0.66rem;
+  letter-spacing: 0.22em;
+  color: var(--gold);
+  opacity: 0.8;
+  display: block;
+  margin-bottom: 0.4rem;
+}
+.news-headline {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--cream);
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.02em;
+}
+.news-body {
+  font-size: 0.95rem;
+  font-weight: 300;
+  color: rgba(242, 233, 216, 0.62);
+  line-height: 1.75;
+}
