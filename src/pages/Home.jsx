@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { useEffect, useState } from 'react'
 
 import bowonImg     from '../assets/crows/crow-bowon.png'
 import dkImg        from '../assets/crows/crow-dk.png'
@@ -18,6 +18,7 @@ const PEOPLE = [
   { id: 'donghee',  name: 'Donghee',   img: dongheeImg   },
 ]
 
+// Desktop: crows cluster in the wheat-field band
 const ZONES = [
   { xMin:  4, xMax: 16, yMin: 24, yMax: 36, hMin: 135, hMax: 160 },
   { xMin: 22, xMax: 34, yMin: 14, yMax: 24, hMin: 175, hMax: 205 },
@@ -28,18 +29,53 @@ const ZONES = [
   { xMin: 10, xMax: 22, yMin: 10, yMax: 20, hMin: 170, hMax: 200 },
 ]
 
+function rand(min, max) { return min + Math.random() * (max - min) }
+
 export default function Home() {
-  const scarecrows = useMemo(() =>
-    PEOPLE.map((person, i) => {
-      const z = ZONES[i]
-      return {
-        ...person,
-        left:   z.xMin + Math.random() * (z.xMax - z.xMin),
-        bottom: z.yMin + Math.random() * (z.yMax - z.yMin),
-        height: Math.round(z.hMin + Math.random() * (z.hMax - z.hMin)),
+  const [scarecrows, setScarecrows] = useState([])
+
+  useEffect(() => {
+    function place() {
+      const isMobile = window.innerWidth <= 640
+
+      if (isMobile) {
+        const title  = document.querySelector('.home-title')
+        const viewH  = window.innerHeight
+        const crowH  = 85 // max crow height on mobile (px)
+        const gap    = 20 // px gap between title bottom and first crow top
+
+        // How far from the bottom the first crow can sit at most
+        // (so its top edge is `gap` px below the title's bottom edge)
+        const titleBottomPx = title ? title.getBoundingClientRect().bottom : viewH * 0.45
+        const maxBottomPx   = viewH - titleBottomPx - gap - crowH
+        const maxBottomPct  = Math.max(4, (maxBottomPx / viewH) * 100)
+
+        // Divide that safe strip into 7 evenly-spaced bands, one crow each
+        const bandH = maxBottomPct / PEOPLE.length
+        setScarecrows(PEOPLE.map((person, i) => ({
+          ...person,
+          bottom: rand(bandH * i + bandH * 0.1, bandH * (i + 1) - bandH * 0.1),
+          left:   i % 2 === 0 ? rand(8, 42) : rand(52, 86),
+          height: Math.round(rand(72, 92)),
+        })))
+      } else {
+        setScarecrows(PEOPLE.map((person, i) => {
+          const z = ZONES[i]
+          return {
+            ...person,
+            left:   rand(z.xMin, z.xMax),
+            bottom: rand(z.yMin, z.yMax),
+            height: Math.round(rand(z.hMin, z.hMax)),
+          }
+        }))
       }
-    })
-  , [])
+    }
+
+    // rAF ensures the title has been painted before we measure it
+    const raf = requestAnimationFrame(place)
+    window.addEventListener('resize', place)
+    return () => { cancelAnimationFrame(raf); window.removeEventListener('resize', place) }
+  }, [])
 
   return (
     <>

@@ -18,7 +18,7 @@
 .painting {
   position: absolute;
   inset: 0;
-  background: url('/vangogh.jpg') center / cover no-repeat;
+  background: url('/vangogh.png') center / cover no-repeat;
   filter: saturate(1.15) brightness(0.92);
 }
 
@@ -178,12 +178,12 @@ nav {
   position: absolute;
   inset: 0;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   z-index: 20;
   pointer-events: none;
-  /* Shift the title into the sky half of the painting */
-  padding-bottom: 30%;
+  /* vh keeps the title in the blue sky regardless of viewport width */
+  padding-top: 13vh;
 }
 
 .home-title {
@@ -481,7 +481,7 @@ nav {
 /* ── Mobile Nav: hamburger menu (≤ 640px) ─────────────────── */
 @media (max-width: 640px) {
   nav {
-    padding: 0.8rem 1.2rem;
+    padding: 1.4rem 1.4rem;
     flex-wrap: nowrap;
     position: relative;
   }
@@ -548,12 +548,11 @@ nav {
     padding: 0.45rem 1rem;
   }
 
-  /* Home title — push up into the blue sky area */
+  /* Home title — in the blue sky area with side breathing room */
   .hero {
-    align-items: flex-start;
-    justify-content: center;
-    padding-top: 5rem;
-    padding-bottom: 0;
+    padding-top: 15vh;
+    padding-left: 1.4rem;
+    padding-right: 1.4rem;
   }
   .home-title-line1 { transform: translateX(0); }
   .home-title-line2 {
