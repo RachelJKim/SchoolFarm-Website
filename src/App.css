@@ -62,7 +62,7 @@ nav {
 }
 .brand-name {
   font-family: 'Cormorant SC', serif;
-  font-size: 1.1rem;
+  font-size: 1.45rem;
   font-weight: 600;
   letter-spacing: 0.22em;
   color: var(--cream);
@@ -105,15 +105,16 @@ nav {
   font-size: 0.78rem;
   font-weight: 600;
   letter-spacing: 0.14em;
-  color: var(--gold);
-  border: 1px solid rgba(200, 160, 32, 0.5);
+  color: #08060a;
+  background: var(--gold);
+  border: none;
   padding: 0.55rem 1.5rem;
-  text-decoration: none;
-  transition: background 0.22s, border-color 0.22s;
+  cursor: pointer;
+  transition: background 0.22s, transform 0.15s;
 }
 .nav-ticket:hover {
-  background: rgba(200, 160, 32, 0.14);
-  border-color: var(--gold);
+  background: #deba2e;
+  transform: translateY(-1px);
 }
 
 /* ── Scarecrow stage (home only) ─────────────────────────────── */
@@ -167,7 +168,7 @@ nav {
   transform: translateY(0);
 }
 
-/* ── Home hero — single-line title ──────────────────────────── */
+/* ── Home hero — two-line title ──────────────────────────────── */
 .hero {
   position: absolute;
   inset: 0;
@@ -177,19 +178,48 @@ nav {
   z-index: 20;
   pointer-events: none;
   /* Shift the title into the sky half of the painting */
-  padding-bottom: 38%;
+  padding-bottom: 30%;
 }
 
 .home-title {
   font-family: 'Cormorant SC', serif;
   font-size: clamp(2.8rem, 7vw, 6.5rem);
   font-weight: 600;
-  color: var(--cream);
   letter-spacing: 0.12em;
-  white-space: nowrap;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1.05;
   text-shadow:
     0 2px 20px rgba(0, 0, 0, 0.65),
     0 0  60px rgba(0, 0, 0, 0.30);
+}
+.home-title-line1 {
+  color: var(--cream);
+  transform: translateX(-12%);
+  font-size: 0.88em;
+}
+.home-title-line2 {
+  display: block;
+  align-self: flex-end;
+  transform: translateX(18%);
+}
+.home-title-kaist {
+  color: var(--gold);
+}
+.home-title-and {
+  font-size: 0.42em;
+  font-weight: 300;
+  color: #ffffff;
+  letter-spacing: 0.22em;
+  line-height: 1.6;
+}
+.home-title-farmers {
+  color: #c8a020;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-shadow: 0 0 24px rgba(200, 160, 32, 0.55);
 }
 
 /* ── Sub-page content panel ──────────────────────────────────── */
@@ -340,4 +370,101 @@ nav {
   font-weight: 300;
   color: rgba(242, 233, 216, 0.62);
   line-height: 1.75;
+}
+
+/* ── Back-to-home overlay (sub-pages) ────────────────────────── */
+.back-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 19;   /* below page-panel (20) so clicks on panel still work */
+  cursor: pointer;
+}
+
+/* ── About page ──────────────────────────────────────────────── */
+.about-content {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+}
+.about-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.about-farm-img {
+  flex-shrink: 0;
+  width: 300px;
+  height: 220px;
+  object-fit: cover;
+  border: 1px solid rgba(200, 160, 32, 0.3);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.45);
+}
+.about-body p {
+  font-size: 1.0rem;
+  font-weight: 300;
+  color: rgba(242, 233, 216, 0.78);
+  line-height: 1.6;
+  letter-spacing: 0.01em;
+  margin: 0;
+}
+.about-body strong {
+  font-weight: 600;
+  color: var(--cream);
+}
+.about-body em {
+  font-style: italic;
+  color: var(--gold);
+}
+
+/* ── Visit Market overlay ────────────────────────────────────── */
+@keyframes harvest-sway {
+  0%, 100% { transform: rotate(-10deg) scale(1);    }
+  50%       { transform: rotate( 10deg) scale(1.08); }
+}
+@keyframes harvest-pulse {
+  0%, 100% { opacity: 1;   letter-spacing: 0.18em; }
+  50%       { opacity: 0.7; letter-spacing: 0.26em; }
+}
+
+.market-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: rgba(4, 3, 12, 0.86);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.market-modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.4rem;
+  cursor: default;
+}
+.market-wheat {
+  font-size: 5rem;
+  display: block;
+  animation: harvest-sway 2.4s ease-in-out infinite;
+}
+.market-text {
+  font-family: 'Cormorant SC', serif;
+  font-size: clamp(2.2rem, 6vw, 4.5rem);
+  font-weight: 600;
+  color: var(--gold);
+  letter-spacing: 0.18em;
+  text-align: center;
+  animation: harvest-pulse 3s ease-in-out infinite;
+  margin: 0;
+}
+.market-sub {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem;
+  font-style: italic;
+  color: rgba(242, 233, 216, 0.55);
+  letter-spacing: 0.05em;
+  margin: 0;
 }
