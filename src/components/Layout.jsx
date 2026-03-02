@@ -4,9 +4,12 @@ import '../App.css'
 
 export default function Layout() {
   const [showMarket, setShowMarket] = useState(false)
+  const [menuOpen,   setMenuOpen]   = useState(false)
   const navigate  = useNavigate()
   const location  = useLocation()
   const isHome    = location.pathname === '/'
+
+  function closeMenu() { setMenuOpen(false) }
 
   return (
     <div className="scene">
@@ -20,23 +23,38 @@ export default function Layout() {
       )}
 
       {/* ── Navigation ── */}
-      <nav>
+      <nav className={menuOpen ? 'nav-menu-open' : ''}>
+        {/* Desktop brand */}
         <NavLink to="/" className="brand">
           <span className="brand-bar" />
           <span className="brand-name">2026</span>
         </NavLink>
 
+        {/* Mobile hamburger / close button */}
+        <button
+          className="mobile-menu-btn"
+          onClick={() => setMenuOpen(o => !o)}
+          aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+        >
+          {menuOpen ? '✕' : '☰'}
+        </button>
+
         <ul className="nav-links">
-          <li><NavLink to="/about"   className={({ isActive }) => isActive ? 'active' : ''}>About</NavLink></li>
-          <li><NavLink to="/crops"   className={({ isActive }) => isActive ? 'active' : ''}>Crops</NavLink></li>
-          <li><NavLink to="/members" className={({ isActive }) => isActive ? 'active' : ''}>Members</NavLink></li>
-          <li><NavLink to="/news"    className={({ isActive }) => isActive ? 'active' : ''}>News</NavLink></li>
+          <li><NavLink to="/about"   onClick={closeMenu} className={({ isActive }) => isActive ? 'active' : ''}>About</NavLink></li>
+          <li><NavLink to="/crops"   onClick={closeMenu} className={({ isActive }) => isActive ? 'active' : ''}>Crops</NavLink></li>
+          <li><NavLink to="/members" onClick={closeMenu} className={({ isActive }) => isActive ? 'active' : ''}>Members</NavLink></li>
+          <li><NavLink to="/news"    onClick={closeMenu} className={({ isActive }) => isActive ? 'active' : ''}>News</NavLink></li>
         </ul>
 
         <button className="nav-ticket" onClick={() => setShowMarket(true)}>
           Visit Market
         </button>
       </nav>
+
+      {/* ── Mobile menu backdrop (closes menu on outside tap) ── */}
+      {menuOpen && (
+        <div className="mobile-menu-backdrop" onClick={closeMenu} />
+      )}
 
       {/* ── Page content ── */}
       <Outlet />

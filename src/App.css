@@ -47,6 +47,11 @@ nav {
   padding: 1.8rem 3.5rem;
 }
 
+/* Hidden on desktop; shown only on mobile */
+.mobile-menu-btn {
+  display: none;
+}
+
 .brand {
   display: flex;
   align-items: center;
@@ -473,21 +478,83 @@ nav {
   .scarecrow img { max-height: 110px; }
 }
 
+/* ── Mobile Nav: hamburger menu (≤ 640px) ─────────────────── */
+@media (max-width: 640px) {
+  nav {
+    padding: 0.8rem 1.2rem;
+    flex-wrap: nowrap;
+    position: relative;
+  }
+
+  /* Hide desktop brand; show hamburger instead */
+  .brand { display: none; }
+
+  .mobile-menu-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    color: var(--gold);
+    font-size: 1.6rem;
+    line-height: 1;
+    cursor: pointer;
+    padding: 0.2rem 0.1rem;
+    width: 2rem;
+    transition: opacity 0.2s;
+  }
+  .mobile-menu-btn:hover { opacity: 0.75; }
+
+  /* Nav links hidden by default on mobile */
+  .nav-links {
+    display: none;
+    order: unset;
+    width: auto;
+  }
+
+  /* ── Menu open state ── */
+
+  /* Show links horizontally inline, like desktop */
+  nav.nav-menu-open .nav-links {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    justify-content: flex-start;
+    gap: 1.4rem;
+    padding-left: 0.8rem;
+  }
+
+  nav.nav-menu-open .nav-links a {
+    font-size: 0.9rem;
+  }
+
+  /* Hide Visit Market when menu is open */
+  nav.nav-menu-open .nav-ticket {
+    display: none;
+  }
+
+  /* Mobile menu backdrop */
+  .mobile-menu-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 29;
+  }
+}
+
 /* ── Small Mobile (≤ 480px) ───────────────────────────────── */
 @media (max-width: 480px) {
-  nav {
-    padding: 0.7rem 1rem;
-  }
-  .brand-name { font-size: 1.2rem; }
-  .nav-links  { gap: 1rem; }
-  .nav-links a { font-size: 0.88rem; }
   .nav-ticket {
     font-size: 0.72rem;
     padding: 0.45rem 1rem;
   }
 
-  /* Home title — centre both lines on small screens */
-  .hero { padding-bottom: 15%; padding-top: 5rem; }
+  /* Home title — push up into the blue sky area */
+  .hero {
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 5rem;
+    padding-bottom: 0;
+  }
   .home-title-line1 { transform: translateX(0); }
   .home-title-line2 {
     align-self: center;
