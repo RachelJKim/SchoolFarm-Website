@@ -320,7 +320,7 @@ nav {
   transform: translateY(-4px);
 }
 .member-img {
-  height: 140px;
+  height: 165px;
   width: auto;
   transition: filter 0.28s ease;
 }
@@ -467,7 +467,7 @@ nav {
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
   }
-  .member-img { height: 100px; }
+  .member-img { height: 118px; }
 
   /* Crops — narrower min column */
   .crops-grid {
@@ -571,7 +571,7 @@ nav {
 
   /* Members */
   .member-card  { padding: 0.8rem 0.4rem; }
-  .member-img   { height: 80px; }
+  .member-img   { height: 95px; }
   .member-name  { font-size: 0.88rem; }
   .member-role  { font-size: 0.72rem; }
 

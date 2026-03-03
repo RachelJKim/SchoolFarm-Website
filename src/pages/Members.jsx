@@ -9,9 +9,9 @@ import dongheeImg   from '../assets/crows/crow-donghee.png'
 const MEMBERS = [
   { name: 'Bowon',     role: 'Field Manager',    img: bowonImg     },
   { name: 'DK',        role: 'Harvest Lead',     img: dkImg        },
-  { name: 'Ho',        role: 'Irrigation Expert', img: hoImg        },
+  { name: 'H.O.',      role: 'Irrigation Expert', img: hoImg        },
   { name: 'Rachel',    role: 'Seed Specialist',  img: rachelImg    },
-  { name: 'KyeungEun', role: 'Seed Specialist',  img: kyeungeunImg },
+  { name: 'Kyungeun', role: 'Seed Specialist',  img: kyeungeunImg },
   { name: 'Jina',      role: 'Seed Specialist',  img: jinaImg      },
   { name: 'Donghee',   role: 'Seed Specialist',  img: dongheeImg   },
 ]

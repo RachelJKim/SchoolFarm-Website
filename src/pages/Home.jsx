@@ -11,22 +11,22 @@ import dongheeImg   from '../assets/crows/crow-donghee.png'
 const PEOPLE = [
   { id: 'bowon',     name: 'Bowon',     img: bowonImg     },
   { id: 'dk',        name: 'DK',        img: dkImg        },
-  { id: 'ho',        name: 'Ho',        img: hoImg        },
+  { id: 'ho',        name: 'H.O.',      img: hoImg        },
   { id: 'rachel',    name: 'Rachel',    img: rachelImg    },
-  { id: 'kyeungeun', name: 'KyeungEun', img: kyeungeunImg },
+  { id: 'kyeungeun', name: 'Kyungeun', img: kyeungeunImg },
   { id: 'jina',     name: 'Jina',      img: jinaImg      },
   { id: 'donghee',  name: 'Donghee',   img: dongheeImg   },
 ]
 
 // Desktop: crows cluster in the wheat-field band
 const ZONES = [
-  { xMin:  4, xMax: 16, yMin: 24, yMax: 36, hMin: 135, hMax: 160 },
-  { xMin: 22, xMax: 34, yMin: 14, yMax: 24, hMin: 175, hMax: 205 },
-  { xMin: 40, xMax: 52, yMin: 20, yMax: 32, hMin: 150, hMax: 175 },
-  { xMin: 58, xMax: 70, yMin: 12, yMax: 22, hMin: 185, hMax: 215 },
-  { xMin: 72, xMax: 82, yMin: 26, yMax: 38, hMin: 140, hMax: 165 },
-  { xMin: 84, xMax: 92, yMin: 16, yMax: 26, hMin: 160, hMax: 190 },
-  { xMin: 10, xMax: 22, yMin: 10, yMax: 20, hMin: 170, hMax: 200 },
+  { xMin:  4, xMax: 16, yMin: 24, yMax: 36, hMin: 158, hMax: 184 },
+  { xMin: 22, xMax: 34, yMin: 14, yMax: 24, hMin: 202, hMax: 236 },
+  { xMin: 40, xMax: 52, yMin: 20, yMax: 32, hMin: 173, hMax: 201 },
+  { xMin: 58, xMax: 70, yMin: 12, yMax: 22, hMin: 213, hMax: 247 },
+  { xMin: 72, xMax: 82, yMin: 26, yMax: 38, hMin: 161, hMax: 190 },
+  { xMin: 84, xMax: 92, yMin: 16, yMax: 26, hMin: 184, hMax: 219 },
+  { xMin: 10, xMax: 22, yMin: 10, yMax: 20, hMin: 196, hMax: 230 },
 ]
 
 function rand(min, max) { return min + Math.random() * (max - min) }
@@ -41,7 +41,7 @@ export default function Home() {
       if (isMobile) {
         const title  = document.querySelector('.home-title')
         const viewH  = window.innerHeight
-        const crowH  = 85 // max crow height on mobile (px)
+        const crowH  = 100 // max crow height on mobile (px)
         const gap    = 20 // px gap between title bottom and first crow top
 
         // How far from the bottom the first crow can sit at most
@@ -56,7 +56,7 @@ export default function Home() {
           ...person,
           bottom: rand(bandH * i + bandH * 0.1, bandH * (i + 1) - bandH * 0.1),
           left:   i % 2 === 0 ? rand(8, 42) : rand(52, 86),
-          height: Math.round(rand(72, 92)),
+          height: Math.round(rand(85, 105)),
         })))
       } else {
         setScarecrows(PEOPLE.map((person, i) => {
