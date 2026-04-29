@@ -1,10 +1,12 @@
 const CROPS = [
-  { name: 'Basil',          season: 'Spring – Summer', status: 'Planned', icon: '🌿' },
-  { name: 'Tomato',         season: 'Spring – Summer', status: 'Planned', icon: '🍅' },
-  { name: 'Eggplant',       season: 'Spring – Summer', status: 'Planned', icon: '🍆' },
-  { name: 'Korean Chilli',  season: 'Spring – Summer', status: 'Planned', icon: '🌶️' },
-  { name: 'Korean Lettuce', season: 'All Year',        status: 'Planned', icon: '🥬' },
-  { name: 'Cat Grass',      season: 'All Year',        status: 'Planned', icon: '🌱' },
+  { name: 'Tomato',         season: 'Spring – Summer', status: 'Growing', icon: '🍅' },
+  { name: 'Basil',          season: 'Spring – Summer', status: 'Growing', icon: '🌿' },
+  { name: '루꼴라 (Rucola)', season: 'Spring – Summer', status: 'Growing', icon: '🥗' },
+  { name: 'Eggplant',       season: 'Spring – Summer', status: 'Growing', icon: '🍆' },
+  { name: 'Korean Lettuce', season: 'All Year',        status: 'Growing', icon: '🥬' },
+  { name: 'Potato',         season: 'Spring – Summer', status: 'Growing', icon: '🥔' },
+  { name: 'Peanut',         season: 'Spring – Summer', status: 'Failed',  icon: '🥜' },
+  { name: 'Green Beans',    season: 'Spring – Summer', status: 'Growing', icon: '🫘' },
 ]
 
 export default function Crops() {
